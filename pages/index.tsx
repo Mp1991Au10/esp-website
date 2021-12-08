@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Center,
   Checkbox,
   Container,
   Flex,
@@ -29,22 +30,26 @@ const Home: NextPage = () => {
 
       <Flex py={16} minH='100vh' direction='column' justify='center' align='center'>
         <main>
-          <Heading as='h1' size='2xl' mb={4}>
-            ESP Tech Stack PoC
-          </Heading>
+          <Center>
+            <Heading as='h1' size='2xl' mb={4}>
+              ESP Tech Stack PoC
+            </Heading>
+          </Center>
 
-          <Stack mb={16}>
-            <p>
-              PoC for the ESP Web-to-Lead forms, using the tech stack being discussed{' '}
-              <ChakraLink
-                color='blue.500'
-                href='https://www.notion.so/efdn/f4e910fa39c5411f805466aca2cadf7d?v=f90fa873a26c43318468890d4bf6d6c0&p=7f56742b50a743a6aa3c892e7606e9b3'
-                isExternal
-              >
-                here.
-              </ChakraLink>
-            </p>
-          </Stack>
+          <Center>
+            <Stack mb={16}>
+              <p>
+                Built just for testing Web-to-Lead forms, using the tech stack being discussed{' '}
+                <ChakraLink
+                  color='blue.500'
+                  href='https://www.notion.so/efdn/f4e910fa39c5411f805466aca2cadf7d?v=f90fa873a26c43318468890d4bf6d6c0&p=7f56742b50a743a6aa3c892e7606e9b3'
+                  isExternal
+                >
+                  here.
+                </ChakraLink>
+              </p>
+            </Stack>
+          </Center>
 
           {/* SF Web-to-Lead form sample */}
           <Box w={['full', '2xl']} p={[8, 10]} backgroundColor='gray.50' rounded={6}>
@@ -102,14 +107,12 @@ const Home: NextPage = () => {
                   <Textarea name='description' bg='white' />
                 </FormControl>
 
-                <Stack>
-                  <Checkbox>
-                    Subscribe to the ESP Newsletter? You&apos;ll hear from us every few weeks, and
-                    we&apos;ll only ever contact you with ESP news.
-                  </Checkbox>
-                </Stack>
+                <Checkbox>
+                  Subscribe to the ESP Newsletter? You&apos;ll hear from us every few weeks, and
+                  we&apos;ll only ever contact you with ESP news.
+                </Checkbox>
 
-                <Button colorScheme='blue' px={8} py={6}>
+                <Button colorScheme='blue' px={8} py={6} type='submit'>
                   Submit
                 </Button>
               </Stack>
