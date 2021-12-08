@@ -1,43 +1,34 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/dc4a526c-394c-4001-8452-b63ce3c1c77b/deploy-status)](https://app.netlify.com/sites/ecosystem-support/deploys)
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/8097623/69177629-c137a400-0abc-11ea-9bcd-da3ba03d2688.png" width="60%" alt="Ethereum Ecosystem Support Program">
-</p>
+## Getting Started
 
-<h1 align="center">
-  Ethereum Ecosystem Support Program
-</h1>
+First, run the development server:
 
-The Ethereum Ecosystem Support Program exists to provide both financial and non-financial support to projects and entities within the greater Ethereum community, in order to accelerate the growth of the ecosystem. The Ecosystem Support Program is an expansion of the original Ethereum Grants Program which mainly focused on financial support. Our focus is on deploying our resources where they will have the biggest impact.
-
-This repository holds the codebase to our website, [esp.ethereum.foundation](https://esp.ethereum.foundation)
-
-## Local development
-
-1. [Set up your development environment](https://www.gatsbyjs.org/tutorial/part-zero/)
-
-2. Clone this project
-
-```
-$ git clone git@github.com:ethereum/esp-website.git && cd esp-website
+```bash
+npm run dev
+# or
+yarn dev
 ```
 
-3. Install dependencies
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-```
-$ yarn
-```
+You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-4. Start developing!
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
-```
-yarn develop
-```
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learning Gatsby
+## Learn More
 
-Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.org/). Here are some places to start:
+To learn more about Next.js, take a look at the following resources:
 
-- **For most developers, we recommend starting with our [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.org/tutorial/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-- **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.org/docs/).** In particular, check out the _Guides_, _API Reference_, and _Advanced Tutorials_ sections in the sidebar.
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
