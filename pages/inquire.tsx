@@ -16,8 +16,80 @@ import {
 } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
+
+interface InquireData {
+  '00N5J000000QWsP': string;
+  company: string;
+  description: string;
+  email: string;
+  first_name: '11';
+  oid: string;
+  retURL: string;
+}
+
+// try {
+//   const response = await fetch("/api/submit", {
+//     method: "POST",
+//     body: JSON.stringify(values),
+//   });
+
+//   if (!response.ok)
+//     throw new Error(`Something went wrong submitting the form.`);
+
+//   setSuccess(true);
+// } catch (err) {
+//   setError(err.message);
+// }
 
 const InquirePage: NextPage = () => {
+  const {
+    formState: { errors },
+    handleSubmit,
+    register
+  } = useForm();
+  const router = useRouter();
+
+  const onSubmit = async (data: InquireData) => {
+    const { oid, retURL, first_name, email, company, description } = data;
+    const _00N5J000000QWsP = data['00N5J000000QWsP'];
+
+    const requestOptions: RequestInit = {
+      method: 'POST',
+      mode: 'no-cors'
+    };
+
+    fetch(
+      `${process.env.WEB_TO_LEAD_BASE_URL}&oid=${oid}&retURL=${retURL}&first_name=${first_name}&email=${email}&company=${company}&00N5J000000QWsP=${_00N5J000000QWsP}&description=${description}`,
+      requestOptions
+    )
+      .then(res => {
+        console.log(res);
+        router.push('/thanks');
+      })
+      .catch(console.error);
+
+    // [TO DO]: make it work with NextJS API
+    // fetch('/api/sf', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Access-Control-Allow-Origin': '*',
+    //     'Content-Type': 'application/json; charset=UTF-8'
+    //   },
+    //   mode: 'no-cors',
+    //   body: JSON.stringify({
+    //     ...data,
+    //     _00N5J000000QWsP: data['00N5J000000QWsP']
+    //   })
+    // })
+    //   .then(res => {
+    //     console.log(res);
+    //     router.push('/thanks');
+    //   })
+    //   .catch(console.error);
+  };
+
   return (
     <Container>
       <Head>
@@ -49,12 +121,19 @@ const InquirePage: NextPage = () => {
 
           {/* SF Web-to-Lead form sample */}
           <Box w={['full', '2xl']} p={[8, 10]} backgroundColor='gray.50' rounded={6}>
-            <form
-              action='https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8'
-              method='POST'
-            >
-              <input type='hidden' name='oid' value='00D5E000000DkPC' />
-              <input type='hidden' name='retURL' value='http://' />
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <Input
+                id='oid'
+                type='hidden'
+                value='00D5E000000DkPC'
+                {...register('oid', { required: true })}
+              />
+              <Input
+                id='retURL'
+                type='hidden'
+                value='http://'
+                {...register('retURL', { required: true })}
+              />
               {/*
               <!--  ----------------------------------------------------------------------  -->
               <!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
@@ -66,7 +145,12 @@ const InquirePage: NextPage = () => {
               <Stack spacing={6} align='flex-start'>
                 <FormControl id='first_name' isRequired>
                   <FormLabel htmlFor='first_name'>Your name</FormLabel>
-                  <Input id='first_name' maxLength={40} name='first_name' type='text' bg='white' />
+                  <Input
+                    maxLength={40}
+                    type='text'
+                    bg='white'
+                    {...register('first_name', { required: true })}
+                  />
                   <FormHelperText>
                     Use whichever preferred name you would like our team to address you by.
                   </FormHelperText>
@@ -74,21 +158,26 @@ const InquirePage: NextPage = () => {
 
                 <FormControl id='email' isRequired>
                   <FormLabel htmlFor='email'>Contact email</FormLabel>
-                  <Input id='email' maxLength={80} name='email' type='email' bg='white' />
+                  <Input
+                    maxLength={80}
+                    type='email'
+                    bg='white'
+                    {...register('email', { required: true })}
+                  />
                 </FormControl>
 
-                <FormControl id='first_name'>
+                <FormControl id='company'>
                   <FormLabel htmlFor='company'>Project or company name</FormLabel>
-                  <Input id='company' maxLength={40} name='company' type='text' bg='white' />
+                  <Input maxLength={40} type='text' bg='white' {...register('company')} />
                 </FormControl>
 
                 <FormControl id='00N5J000000QWsP' isRequired>
                   <FormLabel htmlFor='inquiry_type'>What are you getting in touch about?</FormLabel>
                   <Select
-                    name='00N5J000000QWsP'
                     title='Type of Inquiry'
                     placeholder='Select...'
                     bg='white'
+                    {...register('00N5J000000QWsP', { required: true })}
                   >
                     <option value='Project'>Project</option>
                     <option value='Exploring Possibilities'>Exploring Possibilities</option>
@@ -100,7 +189,7 @@ const InquirePage: NextPage = () => {
                   <FormLabel htmlFor='description'>
                     Briefly enter your question, comment or reason for contacting us below
                   </FormLabel>
-                  <Textarea name='description' bg='white' />
+                  <Textarea bg='white' {...register('description', { required: true })} />
                 </FormControl>
 
                 <Checkbox>

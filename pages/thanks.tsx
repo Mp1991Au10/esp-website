@@ -1,11 +1,9 @@
-import { Container, Flex, Heading, Stack } from '@chakra-ui/react';
+import { Container, Flex, Heading, Link as ChakraLink, Stack } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const ThanksPage: NextPage = () => {
-  const router = useRouter();
-
   return (
     <Container maxW='2xl'>
       <Head>
@@ -17,15 +15,25 @@ const ThanksPage: NextPage = () => {
 
       <Flex py={16} minH='100vh' direction='column' justify='center' align='center'>
         <main>
-          <Heading as='h2' size='xl' mb={4}>
-            Thanks!
+          <Heading as='h2' size='xl' mb={8}>
+            Thank you!
           </Heading>
 
-          <Stack mb={16}>
+          <Stack mb={4}>
             <p>
-              Whether you&apos;re working on a specific project, or you&apos;re still exploring
-              possibilities, you can connect with our team for guidance.
+              Your inquiry has been successfully submitted! The Ecosystem Support team will get back
+              to you within the next few business days.
             </p>
+          </Stack>
+
+          <Stack mb={8}>
+            <p>Until then, kick back and relax.</p>
+          </Stack>
+
+          <Stack mb={8}>
+            <Link href='/' passHref>
+              <ChakraLink color='blue.500'>Go back to home.</ChakraLink>
+            </Link>
           </Stack>
         </main>
       </Flex>
