@@ -1,31 +1,9 @@
-// import Cors from 'cors';
 import jsforce from 'jsforce';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-// const cors = Cors({
-//   methods: ['HEAD', 'POST'],
-//   origin: '*'
-// });
-
-// Helper method to wait for a middleware to execute before continuing
-// And to throw an error when an error happens in a middleware
-const runMiddleware = (req: NextApiRequest, res: NextApiResponse, fn: any) =>
-  new Promise((resolve, reject) => {
-    fn(req, res, (result: any) => {
-      if (result instanceof Error) {
-        return reject(result);
-      }
-
-      return resolve(result);
-    });
-  });
-
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  // Run the middleware
-  // await runMiddleware(req, res, cors);
-
   const { body } = req;
-  const { first_name, last_name, email, company, recordType } = body;
+  const { last_name: LastName, email: Email, company: Company, recordType: RecordTypeId } = body;
   const {
     SF_CONNECTION_LOGIN_URL,
     SF_CONNECTION_USERNAME,
@@ -55,10 +33,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       // Single record creation
       conn.sobject('Lead').create(
         {
-          LastName: last_name,
-          Email: email,
-          Company: company,
-          RecordTypeId: recordType
+          LastName,
+          Email,
+          Company,
+          RecordTypeId
         },
         (err, ret) => {
           if (err || !ret.success) {
