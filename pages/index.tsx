@@ -59,9 +59,15 @@ const HomePage: NextPage = () => {
           </Stack>
 
           <Center>
-            <Button colorScheme='blue' onClick={() => router.push('/inquire')}>
-              <Text size='3xl'>Submit an inquiry</Text>
-            </Button>
+            <Stack>
+              <Button colorScheme='blue' mb={4} onClick={() => router.push('/inquire-alpha')}>
+                <Text size='3xl'>Submit an ALPHA inquiry</Text>
+              </Button>
+
+              <Button colorScheme='green' onClick={() => router.push('/inquire-beta')}>
+                <Text size='3xl'>Submit a BETA inquiry</Text>
+              </Button>
+            </Stack>
           </Center>
         </main>
       </Flex>

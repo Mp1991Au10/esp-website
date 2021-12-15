@@ -19,13 +19,12 @@ import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
 interface InquireData {
-  first_name: string;
   last_name: string;
   email: string;
   company: string;
 }
 
-const InquirePage: NextPage = () => {
+const InquireAlphaPage: NextPage = () => {
   const {
     formState: { errors },
     handleSubmit,
@@ -37,7 +36,10 @@ const InquirePage: NextPage = () => {
     const requestOptions: RequestInit = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+      body: JSON.stringify({
+        ...data,
+        recordType: process.env.SF_RECORD_TYPE_ALPHA
+      })
     };
 
     fetch('/api/sf', requestOptions)
@@ -66,7 +68,7 @@ const InquirePage: NextPage = () => {
         <main>
           <Center>
             <Heading as='h1' size='2xl' mb={4}>
-              Submit an Inquiry
+              Submit an Inquiry w/Alpha Record Type
             </Heading>
           </Center>
 
@@ -82,23 +84,9 @@ const InquirePage: NextPage = () => {
             </Stack>
           </Center>
 
-          {/* SF Web-to-Lead form sample */}
           <Box w={['full', '2xl']} p={[8, 10]} backgroundColor='gray.50' rounded={6}>
             <form onSubmit={handleSubmit(onSubmit)}>
               <Stack spacing={6} align='flex-start'>
-                {/* <FormControl id='first_name' isRequired>
-                  <FormLabel htmlFor='first_name'>First name</FormLabel>
-                  <Input
-                    maxLength={40}
-                    type='text'
-                    bg='white'
-                    {...register('first_name', { required: true })}
-                  />
-                  <FormHelperText>
-                    Use whichever preferred name you would like our team to address you by.
-                  </FormHelperText>
-                </FormControl> */}
-
                 <FormControl id='last_name' isRequired>
                   <FormLabel htmlFor='last_name'>Last name</FormLabel>
                   <Input
@@ -146,26 +134,6 @@ const InquirePage: NextPage = () => {
                   </Select>
                 </FormControl>
 
-                <FormControl id='recordType' isRequired>
-                  <FormLabel htmlFor='recordType'>Lead Record Type</FormLabel>
-                  <Select
-                    title='Record Type'
-                    placeholder='Select...'
-                    bg='white'
-                    {...register('recordType', { required: true })}
-                  >
-                    <option value='0125E00000148Dx'>Alpha</option>
-                    <option value='0125E00000148E2'>Beta</option>
-                  </Select>
-                </FormControl>
-
-                {/* <FormControl id='description' isRequired>
-                  <FormLabel htmlFor='description'>
-                    Briefly enter your question, comment or reason for contacting us below
-                  </FormLabel>
-                  <Textarea bg='white' {...register('description', { required: true })} />
-                </FormControl> */}
-
                 <Checkbox>
                   Subscribe to the ESP Newsletter? You&apos;ll hear from us every few weeks, and
                   we&apos;ll only ever contact you with ESP news.
@@ -183,4 +151,4 @@ const InquirePage: NextPage = () => {
   );
 };
 
-export default InquirePage;
+export default InquireAlphaPage;

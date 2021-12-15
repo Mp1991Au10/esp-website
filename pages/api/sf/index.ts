@@ -33,6 +33,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       // Single record creation
       conn.sobject('Lead').create(
         {
+          // LastName is the only required field by SF
           LastName,
           Email,
           Company,
