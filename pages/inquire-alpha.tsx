@@ -38,13 +38,14 @@ const InquireAlphaPage: NextPage = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         ...data,
-        recordType: process.env.SF_RECORD_TYPE_ALPHA
+        recordTypeFlag: 'alpha'
       })
     };
 
     fetch('/api/sf', requestOptions)
       .then(res => {
         if (res.ok) {
+          console.log({ res });
           router.push('/thanks');
         } else {
           router.push('/error');

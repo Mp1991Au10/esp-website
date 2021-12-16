@@ -38,13 +38,14 @@ const InquireBetaPage: NextPage = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         ...data,
-        recordType: process.env.SF_RECORD_TYPE_BETA
+        recordTypeFlag: 'beta'
       })
     };
 
     fetch('/api/sf', requestOptions)
       .then(res => {
         if (res.ok) {
+          console.log({ res });
           router.push('/thanks');
         } else {
           router.push('/error');
