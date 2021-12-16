@@ -20,6 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     alpha: SF_RECORD_TYPE_ALPHA!,
     beta: SF_RECORD_TYPE_BETA!
   };
+  const RecordTypeId = recordTypeMap[recordTypeFlag];
 
   const conn = new jsforce.Connection({
     oauth2: {
@@ -40,7 +41,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       LastName,
       Email,
       Company,
-      RecordTypeId: recordTypeMap[recordTypeFlag]
+      RecordTypeId
     },
     (err, ret) => {
       if (err || !ret.success) {
