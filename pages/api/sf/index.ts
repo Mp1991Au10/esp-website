@@ -34,7 +34,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     refreshToken: SF_REFRESH_TOKEN
   });
 
-  // Single record creation
+  conn.on('refresh', function (accessToken, res) {
+    console.log('Access token refreshed');
+    console.log({ accessToken });
+    // Refresh event will be fired when renewed access token
+    // to store it in your storage for next request
+  });
+
+  // Single Lead record creation
   conn.sobject('Lead').create(
     {
       // LastName is the only required field by SF
@@ -46,10 +53,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     (err, ret) => {
       if (err || !ret.success) {
         console.error({ err });
-        res.status(400).json({ status: 'fail' });
+        return res.status(400).json({ status: 'fail' });
       }
       console.log('SUCCESS!');
-      res.status(200).json({ status: 'ok' });
+      return res.status(200).json({ status: 'ok' });
     }
   );
 }
